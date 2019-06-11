@@ -17,15 +17,19 @@ var Api = (function() {
     // The request/response getters/setters are defined here to prevent internal methods
     // from calling the methods without any of the callbacks that are added elsewhere.
     getRequestPayload: function() {
+      console.log(`GET request API Payload: ${requestPayload}`);
       return requestPayload;
     },
     setRequestPayload: function(newPayloadStr) {
+      console.log(`SET request API Payload: ${newPayloadStr}`);
       requestPayload = JSON.parse(newPayloadStr);
     },
     getResponsePayload: function() {
+      console.log(`GET response API Payload: ${responsePayload}`);
       return responsePayload;
     },
     setResponsePayload: function(newPayloadStr) {
+      console.log(`SET response API Payload: ${newPayloadStr}`);
       responsePayload = JSON.parse(newPayloadStr);
     },
     setErrorPayload: function() {

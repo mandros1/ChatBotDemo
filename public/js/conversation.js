@@ -185,7 +185,7 @@ var ConversationPanel = (function () {
     var date = dateNow.getDate().toString().length > 1 ? dateNow.getDate() : ('0'+dateNow.getDate().toString());
     var minutes = dateNow.getMinutes().toString().length > 1 ? dateNow.getMinutes() : ('0'+dateNow.getMinutes().toString());
     var hour = dateNow.getHours().toString().length > 1 ? dateNow.getHours() : ('0'+dateNow.getHours().toString());
-    var timestamp = date + ' ' + months[dateNow.getMonth()+1] + ' - ' + hour + ':' + minutes;
+    var timestamp = date + ' ' + months[dateNow.getMonth()] + ' - ' + hour + ':' + minutes;
     var logoClass = [(isUser ? 'userLogo' : 'watsonLogo')];
     var logoText = [(isUser ? 'person' : 'adb')];
     var spanClass = [(isUser ? 'userMessage' : 'chatbotMessage')];
@@ -221,39 +221,6 @@ var ConversationPanel = (function () {
         'text': timestamp
       }]
     };
-    //access_time
-    // var classes = [(isUser ? 'box3' : 'box4'), 'latest', (isTop ? 'top' : 'sub'), (isUser ? 'sb13' : 'sb14')];
-    // var innerDivClasses = ['message-inner', (isUser ? 'userMessage' : 'chatbotMessage')];
-    // var spanClasses = ['timestampSpan', (isUser ? 'userTimestamp' : 'chatbotTimestamp')];
-    // var dateNow = new Date();
-    // var months = ['SIJ', 'VELJ', 'OZU', 'TRA', 'SVI', 'LIP', 'SRP', 'KOL', 'RUJ', 'LIS', 'STU', 'PRO'];
-    // var date = dateNow.getDate().toString().length > 1 ? dateNow.getDate() : ('0'+dateNow.getDate().toString());
-    // var timestamp = date + '-' + months[dateNow.getMonth()+1] + ' - ' + dateNow.getHours() + ':' + dateNow.getMinutes();
-    // var messageJson = {
-    //   // <div class='segments'>
-    //   'tagName': 'div',
-    //   'classNames': ['segments'],
-    //   'children': [{
-    //     // <div class='from-user/from-watson latest'>
-    //     'tagName': 'div',
-    //     'classNames': classes,
-    //     'children': [{
-    //       // <div class='message-inner'>
-    //       'tagName': 'div',
-    //       'classNames': innerDivClasses,
-    //       'children': [{
-    //         // <p>{messageText}</p>
-    //         'tagName': 'p',
-    //         'text': res.innerhtml
-    //       }]
-    //     }]
-    //   },
-    //     {
-    //       'tagName': 'span',
-    //       'classNames': spanClasses,
-    //       'text': timestamp
-    //     }]
-    // };
     return Common.buildDomElement(messageJson);
   }
 
@@ -297,6 +264,7 @@ var ConversationPanel = (function () {
   }
 
   function getResponse(responses, gen) {
+    console.log(`getResponses: ${responses}`);
     var title = '', description = '';
     if (gen.hasOwnProperty('title')) {
       title = gen.title;
@@ -383,6 +351,7 @@ var ConversationPanel = (function () {
     // Retrieve the context from the previous server response
     var context;
     var latestResponse = Api.getResponsePayload();
+    console.log(`SendMessage response payload: ${JSON.stringify(latestResponse)}`);
     if (latestResponse) {
       context = latestResponse.context;
     }
@@ -396,6 +365,7 @@ var ConversationPanel = (function () {
     // Submit on enter key, dis-allowing blank messages
     if (event.keyCode === 13 && inputBox.value) {
       sendMessage(inputBox.value);
+      console.log(`Message: ${inputBox.value}`)
       // Clear input box for further messages
       inputBox.value = '';
       Common.fireEvent(inputBox, 'input');

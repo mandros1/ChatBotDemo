@@ -40,6 +40,7 @@ var newContext = {
   }
 };
 
+// IMPORTANT: THIS ONE SENDS THE USER MESSAGE/REQUEST TO WATSON API/ I think?
 // Endpoint to be call from the client side
 app.post('/api/message', function (req, res) {
   var assistantId = process.env.ASSISTANT_ID || '<assistant-id>';
@@ -87,6 +88,7 @@ app.post('/api/message', function (req, res) {
     return res.json(data);
   });
 });
+
 
 app.get('/api/session', function (req, res) {
   assistant.createSession({
