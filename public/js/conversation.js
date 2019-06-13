@@ -177,6 +177,7 @@ var ConversationPanel = (function () {
     }
   }
 
+
   // Constructs new DOM element from a message
   function getDivObject(res, isUser, isTop) {
     var classes = [(isUser ? 'userBox' : 'watsonBox'), 'latest', (isTop ? 'top' : 'sub'), (isUser ? 'userBubble' : 'watsonBubble')];
@@ -236,7 +237,10 @@ var ConversationPanel = (function () {
     return null;
   }
 
+  // TODO: no idea what this does, can do without it?
   function getOptions(optionsList, preference) {
+    console.log(`GetOptions Option List: ${optionsList}`);
+    console.log(`GetOptions Preference: ${preference}`);
     var list = '';
     var i = 0;
     if (optionsList !== null) {
@@ -263,8 +267,9 @@ var ConversationPanel = (function () {
     return list;
   }
 
+  // TODO: keep this as this handles responses from the WA and it's information
   function getResponse(responses, gen) {
-    console.log(`getResponses: ${responses}`);
+    console.log(`getResponse: ${JSON.stringify(gen)}`);
     var title = '', description = '';
     if (gen.hasOwnProperty('title')) {
       title = gen.title;
@@ -303,9 +308,11 @@ var ConversationPanel = (function () {
     }
   }
 
+  // TODO: Here all it does is handle user input? It seems to handle only user input or gets undefined - Wierd
   // Constructs new generic elements from a message payload
   function buildMessageDomElements(newPayload, isUser) {
     var textArray = isUser ? newPayload.input.text : newPayload.output.text;
+    console.log(`BuildMessageDomElements: ${textArray}`);
     if (Object.prototype.toString.call(textArray) !== '[object Array]') {
       textArray = [textArray];
     }
@@ -341,17 +348,20 @@ var ConversationPanel = (function () {
     return responses;
   }
 
+
   // Scroll to the bottom of the chat window
   function scrollToChatBottom() {
     var scrollingChat = document.querySelector('#scrollingChat');
     scrollingChat.scrollTop = scrollingChat.scrollHeight;
   }
 
+
+  // TODO: this part sends the request to the API which ultimatively sets the request and response payloads
   function sendMessage(text) {
     // Retrieve the context from the previous server response
     var context;
     var latestResponse = Api.getResponsePayload();
-    console.log(`SendMessage response payload: ${JSON.stringify(latestResponse)}`);
+    //console.log(`SendMessage response payload: ${JSON.stringify(latestResponse)}`);
     if (latestResponse) {
       context = latestResponse.context;
     }
@@ -360,12 +370,12 @@ var ConversationPanel = (function () {
     Api.sendRequest(text, context);
   }
 
+  // TODO: probably keep since it gets fired on enter click and sends the message
   // Handles the submission of input
   function inputKeyDown(event, inputBox) {
     // Submit on enter key, dis-allowing blank messages
     if (event.keyCode === 13 && inputBox.value) {
       sendMessage(inputBox.value);
-      console.log(`Message: ${inputBox.value}`)
       // Clear input box for further messages
       inputBox.value = '';
       Common.fireEvent(inputBox, 'input');

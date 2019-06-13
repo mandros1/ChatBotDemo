@@ -84,7 +84,6 @@ app.post('/api/message', function (req, res) {
       const status = (err.code  !== undefined && err.code > 0)? err.code : 500;
       return res.status(status).json(err);
     }
-
     return res.json(data);
   });
 });

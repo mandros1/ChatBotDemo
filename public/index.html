@@ -10,33 +10,33 @@
   <link rel="shortcut icon" href="favicon.png" type="image/png">
   <link rel="stylesheet" href="css/app.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<header>
-  <div class="logo">
-    <img src="../img/atlantic.png">
-    <p>HR</p>
-  </div>
-</header>
+  <header>
+    <div class="logo">
+      <img src="../img/atlantic.png">
+      <p>HR</p>
+    </div>
+  </header>
 
-<body>
-  <div id="contentParent" class="responsive-columns-wrapper">
-    <div id="chat-column-holder" class="responsive-column content-column">
-      <div class="chat-column">
-        <div id="scrollingChat"></div>
-        <p class="user-typing" id="user-typing-field"></p>
-        <div id="chat-input">
-          <label for="textInput" class="inputOutline">
-            <input id="textInput" class="input responsive-column" placeholder="Unesite svoje pitanje ovdje" type="text" onkeydown="ConversationPanel.inputKeyDown(event, this)"
-              autofocus>
-          </label>
+  <body>
+    <div id="contentParent" class="responsive-columns-wrapper">
+      <div id="chat-column-holder" class="responsive-column content-column">
+        <div class="chat-column">
+          <div id="scrollingChat"></div>
+          <p class="user-typing" id="user-typing-field"></p>
+          <div id="chat-input">
+            <label for="textInput" class="inputOutline">
+              <input id="textInput" class="input responsive-column" placeholder="Unesite svoje pitanje ovdje" type="text" onkeydown="ConversationPanel.inputKeyDown(event, this)"
+                autofocus>
+            </label>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="js/common.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/conversation.js"></script>
-  <script src="js/global.js"></script>
-  <script type="text/javascript" src="https://cdn.rawgit.com/watson-developer-cloud/watson-developer-cloud.github.io/master/analytics.js"></script>
-</body>
+    <script src="js/common.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/conversation.js"></script>
+    <script src="js/global.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/watson-developer-cloud/watson-developer-cloud.github.io/master/analytics.js"></script>
+  </body>
 </html>

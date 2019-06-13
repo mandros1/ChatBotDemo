@@ -17,19 +17,19 @@ var Api = (function() {
     // The request/response getters/setters are defined here to prevent internal methods
     // from calling the methods without any of the callbacks that are added elsewhere.
     getRequestPayload: function() {
-      console.log(`GET request API Payload: ${requestPayload}`);
+      //console.log(`GET request API Payload: ${JSON.stringify(requestPayload)}`);
       return requestPayload;
     },
     setRequestPayload: function(newPayloadStr) {
-      console.log(`SET request API Payload: ${newPayloadStr}`);
-      requestPayload = JSON.parse(newPayloadStr);
+        //console.log(`SET request API Payload: ${JSON.stringify(newPayloadStr)}`);
+        requestPayload = JSON.parse(newPayloadStr);
     },
     getResponsePayload: function() {
-      console.log(`GET response API Payload: ${responsePayload}`);
+      //console.log(`GET response API Payload: ${JSON.stringify(responsePayload)}`);
       return responsePayload;
     },
     setResponsePayload: function(newPayloadStr) {
-      console.log(`SET response API Payload: ${newPayloadStr}`);
+      //console.log(`SET response API Payload: ${JSON.stringify(newPayloadStr)}`);
       responsePayload = JSON.parse(newPayloadStr);
     },
     setErrorPayload: function() {
@@ -66,6 +66,7 @@ var Api = (function() {
       payloadToWatson.context = context;
     }
 
+    // TODO: IMPORTANT this sends the POST request to the Watson Assistant and gets back the ResponsePayload
     // Built http request
     var http = new XMLHttpRequest();
     http.open('POST', messageEndpoint, true);
@@ -79,7 +80,7 @@ var Api = (function() {
             'generic': [
               {
                 'response_type': 'text',
-                'text': 'I\'m having trouble connecting to the server, please refresh the page'
+                'text': 'Ups, nešto je pošlo po krivu, molimo Vas da osvježite stranicu, hvala.'
               }
             ],
           }
@@ -87,6 +88,7 @@ var Api = (function() {
       }
     };
 
+      // TODO: IMPORTANT this is where we set the newest request payload
     var params = JSON.stringify(payloadToWatson);
     // Stored in variable (publicly visible through Api.getRequestPayload)
     // to be used throughout the application
